@@ -17,3 +17,5 @@ class MetroAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Metro, MetroAdmin)
+admin.site.register(Category)
+admin.site.register(ChildCategory)
