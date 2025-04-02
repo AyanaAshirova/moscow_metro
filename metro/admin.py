@@ -14,8 +14,30 @@ class MetroAdmin(admin.ModelAdmin):
         return "-"
     image_tag.short_description = "Image"
 
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'image_tag', 'order','color')  # Отобразит фото в списке
+    readonly_fields = ('image_tag',)  # Чтобы изображение было видно в форме
+    fields = ('name', 'image', 'image_tag')
+
+    def image_tag(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" style="max-height: 100px;"/>', obj.image.url)
+        return "-"
+    image_tag.short_description = "Image"
+
+class ChildCategoryAdmin(admin.ModelAdmin):
+    list_diplay = ('name', 'image_tag', 'order')  # Отобразит фото в списке
+    readonly_fields = ('image_tag',)  # Чтобы изображение было видно в форме
+    fields = ('name', 'image', 'image_tag')
+
+    def image_tag(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" style="max-height: 100px;"/>', obj.image.url)
+        return "-"
+    image_tag.short_description = "Image"
+
 
 
 admin.site.register(Metro, MetroAdmin)
-admin.site.register(Category)
-admin.site.register(ChildCategory)
+admin.site.register(Category,CategoryAdmin)
+admin.site.register(ChildCategory,ChildCategoryAdmin)

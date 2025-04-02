@@ -14,15 +14,23 @@ class Metro(models.Model):
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=255, verbose_name='Название')
+    icon = models.FileField(upload_to='category_icons/', verbose_name='Иконка')
+    image = models.ImageField(upload_to='category_image/', verbose_name='Фотография')
+    color = models.CharField(max_length=100, verbose_name='Цвет', default='#4C4DDC')
+    order = models.IntegerField(verbose_name='порядок', default=0)
+
 
     def __str__(self):
         return self.name
 
 
 class ChildCategory(models.Model):
-    name = models.CharField(max_length=100)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='child_category')
+    name = models.CharField(max_length=255, verbose_name='Название')
+    is_popular = models.BooleanField(default=False, verbose_name='Популярная')
+    parent = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Родительская категория',                           related_name='children')
+    image = models.ImageField(upload_to='category_images/', verbose_name='Изображение')
+    order = models.IntegerField(verbose_name='порядок', default=0)
 
     def __str__(self):
         return self.name
