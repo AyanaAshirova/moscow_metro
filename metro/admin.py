@@ -39,5 +39,5 @@ class ChildCategoryAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Metro, MetroAdmin)
-admin.site.register(Category,CategoryAdmin)
 admin.site.register(ChildCategory,ChildCategoryAdmin)
+admin.site.register(Category,CategoryAdmin)
